@@ -1,0 +1,32 @@
+<%- include('../partial/header.ejs')%>
+<main>
+
+    <h2>Welcome to you personal profile <%= user.firstName%>! Here you can edit/delete the games that you have created from the wishlist page</h2><br>
+    
+       <h2><%= user.firstName%>'s Wishlist Games</h2><br>
+               <table>
+                <%if(events.length){%>
+            
+                    <tr>
+                        <th id="title">Title</th>
+                        <th> Action</th>
+                    </tr>
+                    <%events.forEach(event=>{%>
+                <tr>
+                    <td> <a href ='/events/<%= event.id%>'><p> <%= event.title%></p>  </a></td>
+                    <td>
+                        <form> 
+                            <button type="submit" formmethod="GET" formaction="/events/<%= event.id%>/edit"> <img src="/images/edit.png" id="img"> </button>
+                            <button  type="submit" formmethod="POST" formaction="/events/<%= event.id%>?_method=DELETE"><img src="/images/delete.png" id="delete"></button>
+                           </form>
+                    </td>
+                </tr>
+                <%});
+            }else{%>
+                <p> You have not created any events</p>
+                <%}%>
+               </table>
+               <br>
+    
+</main>
+    <%- include('../partial/footer.ejs')%>
